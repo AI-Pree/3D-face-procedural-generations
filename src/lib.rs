@@ -10,6 +10,6 @@ mod tests {
     ///random testing 
     #[test]
     fn check() {
-        assert_eq!("something", "someting");
+        assert_eq!("something", "something");
     }
 }
