@@ -3,17 +3,17 @@
 use sdl2; // importing all the modules from sdl2
 
 /// struct for the window screen size
-pub struct Window {
+pub struct WindowDisplay {
     pub height: u32,
     pub width: u32,
     pub sdl: sdl2::Sdl,
 }
 
 /// implementaion for the windows screen size
-impl Window {
+impl WindowDisplay {
 
     /// creates a new windowsize instance
-    pub fn new(width: u32, height: u32) -> Result<Window, &'static str> {
+    pub fn new(width: u32, height: u32) -> Result<WindowDisplay, &'static str> {
         let width = width;
         let height = height;
         
@@ -31,7 +31,7 @@ impl Window {
         
        
         // return ok as the result generic when the window size is not too large
-        Ok(Window {
+        Ok(WindowDisplay {
             width,
             height,
             sdl
