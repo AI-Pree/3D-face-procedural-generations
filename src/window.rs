@@ -1,7 +1,6 @@
 /// lib for wrapper around sdl2
 
 use sdl2; // importing all the modules from sdl2
-use std::error::Error; // for the dynamic error
 
 /// struct for the window screen size
 pub struct Window {
