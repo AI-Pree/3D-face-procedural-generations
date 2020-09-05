@@ -38,19 +38,20 @@ impl Window {
         })
     } 
     
-    // create a window screen based on the windowsize
-    pub fn spawn_window(&self) -> Result<sdl2::video::Window, sdl2::video::WindowBuildError> {
+    /// create a window screen based on the windowsize
+    pub fn spawn_window(&self) -> Result<sdl2::video::Window, String> {
         // initialise the video subsystem
         let video_subsystem = (self.sdl).video().unwrap();
              
         // creating a window instance to display here
-        let window = video_subsystem
+        match video_subsystem
             .window("ProcGen", self.width, self.height) // returns result with WindowBuilder type
             .resizable()    // set the window to be resizable
             .opengl()       // sets the window to be usable with the openGL context
             .build()        // builds the window
-            .unwrap();
-
-        Ok(window)          // return result with Ok of window type in sdl2 video
+            {
+                Ok(window) => Ok(window), // return result with Ok of window type in sdl2 video
+                Err(error) => panic!("couldn't build the window: {:?}", error)
+            }
     }
 }
