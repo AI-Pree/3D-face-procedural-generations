@@ -39,13 +39,7 @@ impl Window {
     } 
     
     // create a window screen based on the windowsize
-    pub fn spawn_window(&self)-> Result<(), Box<dyn Error>> {
-        
-        // creating sdl2 instance to interact with openGL  
-        let _sdl = sdl2::init()?; // return error to the client side, so user can handle it depending on the error
-
-        // return sdl object to  ok, and making sure the function ran without any error
-        Ok(())
-        
+    pub fn spawn_window(&self) {
+        // add code here
     }
 }
