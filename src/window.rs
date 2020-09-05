@@ -49,12 +49,3 @@ impl Window {
         
     }
 }
-
-#[cfg(test)]
-mod tests {
-
-    #[test]
-    pub fn check() {
-        assert_eq!("something", "something");
-    }
-}
