@@ -1,5 +1,5 @@
 // lib for wrapper around sdl2
-
+use gl;
 use sdl2; // importing all the modules from sdl2
 use std::error::Error;
 use sdl2::event::Event;
@@ -51,21 +51,33 @@ impl WindowDisplay {
             .opengl()       // sets the window to be usable with the openGL context
             .build()?;      // builds the window and throws the error in Result
         
+        // create opengl context
+        let _gl_context = window.gl_create_context().unwrap();
+  
         // creating an event loop
         let mut event_pump = sdl.event_pump().unwrap();
         
+        // load OpenGl function pointer
+        let _gl = gl::load_with(|s| video_subsystem.gl_get_proc_address(s) as *const std::os::raw::c_void); 
+    
+        unsafe {
+            gl::ClearColor(0.3, 0.3, 0.5, 1.0); 
+        }
+ 
         // using loop to keep window alive throughout the session
-        'main: loop {
+        'running: loop {
             for event in event_pump.poll_iter() {
                 // handle use input
                 match event {
-                    Event::Quit {..} => break 'main,
+                    Event::Quit {..} => break 'running,
                     _ => {},
                 }
             }
-            // render windows content here
+            unsafe {
+                gl::Clear(gl::COLOR_BUFFER_BIT);
+            }
+            window.gl_swap_window();
         }
-
         Ok(window)
     }
 }
