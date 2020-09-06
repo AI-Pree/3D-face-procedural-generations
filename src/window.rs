@@ -47,7 +47,12 @@ impl WindowDisplay {
             .resizable()    // set the window to be resizable
             .opengl()       // sets the window to be usable with the openGL context
             .build()?;      // builds the window and throws the error in Result
-     
+        
+        // setting up the openGl version to be used
+        let gl_attr = video_subsystem.gl_attr();
+        gl_attr.set_context_profile(sdl2::video::GLProfile::Core);
+        gl_attr.set_context_version(4, 5); // using openGl 4.5(core) version
+
         Ok((sdl, window, video_subsystem))
     }
 }
