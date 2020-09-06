@@ -23,6 +23,7 @@ mod tests {
     
     /// testing if the new window is spawned
     #[test]
+    #[ignore]
     fn new_window_has_spawned() {
         let display_window = window::WindowDisplay::new(400, 400).unwrap(); //creates the new instance of the display window
         assert!(!display_window.spawn_window().is_err());
