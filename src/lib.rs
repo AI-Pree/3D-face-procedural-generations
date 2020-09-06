@@ -1,5 +1,6 @@
-/// module for the window 
+/// modules for the lib 
 pub mod window;
+pub mod shader;
 
 /// Unit testing for the window module
 /// all the unit test for the window module
