@@ -3,21 +3,21 @@
 use sdl2; // importing all the modules from sdl2
 
 /// struct for the window screen size
-pub struct Window {
+#[derive(Copy, Clone, Debug)]
+pub struct WindowDisplay {
     pub height: u32,
     pub width: u32,
-    pub sdl: sdl2::Sdl,
 }
 
 /// implementaion for the windows screen size
-impl Window {
+impl WindowDisplay {
 
     /// creates a new windowsize instance
-    pub fn new(width: u32, height: u32) -> Result<Window, &'static str> {
+    pub fn new(width: u32, height: u32) -> Result<WindowDisplay, &'static str> {
         let width = width;
         let height = height;
         
-        // windows size sud be between size of 800
+        // windows size sud be less than size of 800
         // Needs be appllied later:
         //  - Change the scale restriction here
         //  - User can change the window size only during windowed mode
@@ -25,23 +25,22 @@ impl Window {
         if width > 800 && height > 800 {
             return Err("Windows size is too big");
         }
-
-        // creating sdl2 instance to interact with openGL  
-        let sdl = sdl2::init().unwrap();
-        
        
         // return ok as the result generic when the window size is not too large
-        Ok(Window {
+        Ok(WindowDisplay {
             width,
             height,
-            sdl
         })
     } 
     
     /// create a window screen based on the windowsize
     pub fn spawn_window(&self) -> Result<sdl2::video::Window, String> {
+       
+        // creating sdl2 instance to interact with openGL  
+        let sdl = sdl2::init().unwrap();
+         
         // initialise the video subsystem
-        let video_subsystem = (self.sdl).video().unwrap();
+        let video_subsystem = sdl.video().unwrap();
              
         // creating a window instance to display here
         match video_subsystem
