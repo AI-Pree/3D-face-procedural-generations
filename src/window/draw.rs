@@ -1,8 +1,2 @@
-use super::*;
 /// Uses SDL to create OpenGL context
-pub fn _opengl_context(window: &sdl2::video::Window) {
-    //create opengl context instance
-    let _gl_context = window.gl_create_context().unwrap_or_else(|error| {
-        panic!("Error creating gl context: {:?}", error);
-    });
-}
+pub fn shader(_window: &sdl2::video::Window) {}
