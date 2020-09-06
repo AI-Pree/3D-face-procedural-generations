@@ -76,7 +76,7 @@ impl WindowDisplay {
             unsafe {
                 gl::Clear(gl::COLOR_BUFFER_BIT);
             }
-            window.gl_swap_window();
+            window.gl_swap_window(); // swaps the buffer to display the current context in the buffer
         }
         Ok(window)
     }
