@@ -5,8 +5,8 @@ use sdl2::event::Event;
 /// main function for using sdl2 library wrapper
 fn main() {
     // dimension of the window
-    let height: u32 = 600;
-    let width: u32  = 600;
+    let height: u32 = 800;
+    let width: u32  = 800;
 
     let new_window                             = window::WindowDisplay::new(height, width).unwrap(); // creating new instance of the window
     let (sdl, display_window, video_subsystem) = new_window.spawn_window().unwrap(); // generate core elements for interacting with openGl
