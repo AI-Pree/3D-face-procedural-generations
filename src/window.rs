@@ -1,6 +1,5 @@
-/// lib for wrapper around sdl2
-
-use sdl2; // importing all the modules from sdl2
+// lib for wrapper around sdl2
+use std::error::Error;
 
 /// struct for the window screen size
 #[derive(Copy, Clone, Debug)]
@@ -18,7 +17,7 @@ impl WindowDisplay {
         let height = height;
         
         // windows size sud be less than size of 800
-        // Needs be appllied later:
+        // Needs to be applied later:
         //  - Change the scale restriction here
         //  - User can change the window size only during windowed mode
         //  - User can implement the full screen mode
@@ -34,23 +33,28 @@ impl WindowDisplay {
     } 
     
     /// create a window screen based on the windowsize
-    pub fn spawn_window(&self) -> Result<sdl2::video::Window, String> {
+    pub fn spawn_window(&self) -> Result<(sdl2::Sdl, sdl2::video::Window, sdl2::VideoSubsystem), Box<dyn Error>> {
        
         // creating sdl2 instance to interact with openGL  
         let sdl = sdl2::init().unwrap();
          
         // initialise the video subsystem
-        let video_subsystem = sdl.video().unwrap();
-             
+        let video_subsystem = sdl.video().unwrap(); 
+        
         // creating a window instance to display here
-        match video_subsystem
+        let window = video_subsystem
             .window("ProcGen", self.width, self.height) // returns result with WindowBuilder type
             .resizable()    // set the window to be resizable
             .opengl()       // sets the window to be usable with the openGL context
-            .build()        // builds the window
-            {
-                Ok(window) => Ok(window), // return result with Ok of window type in sdl2 video
-                Err(error) => panic!("couldn't build the window: {:?}", error)
-            }
+            .build()?;      // builds the window and throws the error in Result
+        
+        // setting up the openGl version to be used
+        let gl_attr = video_subsystem.gl_attr();
+        gl_attr.set_context_profile(sdl2::video::GLProfile::Core);
+        gl_attr.set_context_version(4, 5); // using openGl 4.5(core) version
+
+        Ok((sdl, window, video_subsystem))
     }
 }
+
+pub mod draw;
