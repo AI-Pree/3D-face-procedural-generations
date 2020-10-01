@@ -56,5 +56,3 @@ impl WindowDisplay {
         Ok((sdl, window, video_subsystem))
     }
 }
-
-pub mod draw;
