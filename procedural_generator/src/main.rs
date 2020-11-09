@@ -1,4 +1,4 @@
-use procedural_generations::window;
+use gl_wrapper::window;
 use sdl2::event::Event;
 
 

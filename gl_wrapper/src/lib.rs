@@ -1,9 +1,15 @@
-/// modules for the lib 
+//! Procedural Generation
+//!
+//! A library for generating procedural terrains models.
+//! It uses marching cube algorithm to determine the vertex points
+//! of the models
+
+// modules for the lib
 pub mod window;
 pub mod render_gl;
 
-/// Unit testing for the window module
-/// all the unit test for the window module
+// Unit testing for the window module
+// all the unit test for the window module
 #[cfg(test)]
 mod tests {
     use super::*;
