@@ -1,2 +1,2 @@
 # ProceduralGenerations
-Procedurally generating 3D human faces
+Procedurally generating 3D faces
